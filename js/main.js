@@ -45,18 +45,139 @@ function createMap(){
         "Open Street Map": osm
     };
 
-    //adding mini map plugin
+    //------------add mini map plugin------------------//
     var osm2 = new L.tileLayer(mbStyleUrl, {id: 'badajos/ck0ohmxns078c1cmjd7r0as5l', token: apitoken,  attribution: mbAttr});
 
-    var miniMap = new L.Control.MiniMap(osm2, {centerFixed: [63.0, -151.0], zoomLevelFixed: 2, position: 'topright', /*zoomLevelOffset: -7,*/ autoToggleDisplay: true}).addTo(map);
-
-    var overlayMaps = {
-        /*"moose movements": test_line,*/
-        /*"Fire": fireLayer*/
-    };
+    var miniMap = new L.Control.MiniMap(osm2, {centerFixed: [63.0, -151.0], zoomLevelFixed: 2, position: 'topleft', /*zoomLevelOffset: -7,*/ autoToggleDisplay: true}).addTo(map);
     
-    //add leaflet menu
-    L.control.layers(baseMaps, overlayMaps).addTo(map);
+    //------------add home ranges (overlay)-----------//
+    
+    var hr_A32 = L.geoJson.ajax("data/poly_GPS_A_32.geojson", {
+        style: function(feature){
+            d = feature.properties.colorByAttr;
+            return {color: '#696969',  
+                    opacity:0.5
+                    }
+         }
+    });
+    var hr_A35 = L.geoJson.ajax("data/poly_GPS_A_35.geojson", {
+        style: function(feature){
+            d = feature.properties.colorByAttr;
+            return {color: '#556B2F',  
+                    opacity:0.5
+                    }
+         }
+    });
+    var hr_A51 = L.geoJson.ajax("data/poly_GPS_A_51.geojson", {
+        style: function(feature){
+            d = feature.properties.colorByAttr;
+            return {color: '#B8860B',  
+                    opacity:0.5
+                    }
+         }
+    });
+    var hr_A59 = L.geoJson.ajax("data/poly_GPS_A_59.geojson", {
+        style: function(feature){
+            d = feature.properties.colorByAttr;
+            return {color: '#006400',  
+                    opacity:0.5
+                    }
+         }
+    });
+    var hr_A61 = L.geoJson.ajax("data/poly_GPS_A_61.geojson", {
+        style: function(feature){
+            d = feature.properties.colorByAttr;
+            return {color: '#00008B',  
+                    opacity:0.5
+                    }
+         }
+    });
+    var hr_A73 = L.geoJson.ajax("data/poly_GPS_A_73.geojson", {
+        style: function(feature){
+            d = feature.properties.colorByAttr;
+            return {color: '#1E90FF',  
+                    opacity:0.5
+                    }
+         }
+    });
+    var hr_A82 = L.geoJson.ajax("data/poly_GPS_A_82.geojson", {
+        style: function(feature){
+            d = feature.properties.colorByAttr;
+            return {color: '#483D8B',  
+                    opacity:0.5
+                    }
+         }
+    });
+    var hr_A86 = L.geoJson.ajax("data/poly_GPS_A_86.geojson", {
+        style: function(feature){
+            d = feature.properties.colorByAttr;
+            return {color: '#FF1493',  
+                    opacity:0.5
+                    }
+         }
+    });
+    var hr_A89 = L.geoJson.ajax("data/poly_GPS_A_89.geojson", {
+        style: function(feature){
+            d = feature.properties.colorByAttr;
+            return {color: '#8B4513',  
+                    opacity:0.5
+                    }
+         }
+    });
+    var hr_A96 = L.geoJson.ajax("data/poly_GPS_A_96.geojson", {
+        style: function(feature){
+            d = feature.properties.colorByAttr;
+            return {color: '#4B0082',  
+                    opacity:0.5
+                    }
+         }
+    });
+    var hr_A97 = L.geoJson.ajax("data/poly_GPS_A_97.geojson", {
+        style: function(feature){
+            d = feature.properties.colorByAttr;
+            return {color: '#8A2BE2',  
+                    opacity:0.5
+                    }
+         }
+    });
+    var hr_A100 = L.geoJson.ajax("data/poly_GPS_A_100.geojson", {
+        style: function(feature){
+            d = feature.properties.colorByAttr;
+            return {color: '#8B0000',  
+                    opacity:0.5
+                    }
+         }
+    });
+    var hr_A103 = L.geoJson.ajax("data/poly_VHF_A_103.geojson", {
+        style: function(feature){
+            d = feature.properties.colorByAttr;
+            return {color: '#008B8B',  
+                    opacity:0.5
+                    }
+         }
+    });
+    
+    var groupedOverlays = {
+      "Pre-fire Home Range": {
+        "A_32": hr_A32,
+        "A_35": hr_A35,
+        "A_51": hr_A51,
+        "A_59": hr_A59,
+        "A_61": hr_A61,
+        "A_73": hr_A73,
+        "A_82": hr_A82,
+        "A_86": hr_A86,
+        "A_89": hr_A89,
+        "A_96": hr_A96,
+        "A_97": hr_A97,
+        "A_100": hr_A100,
+        "A_103": hr_A103
+      }
+      };
+
+    //----add leaflet menu (grouplayer plugin)---------//
+    L.control.groupedLayers(baseMaps, groupedOverlays).addTo(map);
+
     getFire(map);
     getMoose(map);
 };
@@ -120,8 +241,8 @@ function addGeoJSONLayer(map, attributes) {
         popupAnchor:  [-3, -10]
     });
     
-    var linelayer = new L.GeoJSON.AJAX(linedata, 
-        { style: function(feature){
+    //---------------Setting Line Styles-------------//
+    var styleLine = function(feature){
             d = feature.properties.colorByAttr;
             var line = feature.properties.Individ_ID;
             
@@ -153,13 +274,10 @@ function addGeoJSONLayer(map, attributes) {
             else if (line === 'A_103')
                 return {color: '#008B8B',opacity:0.7};
             else return {color: '#5F9EA0',opacity:0.7}
-         },
-        pointToLayer: function (feature, latLng) {
-            if (feature.properties.hasOwnProperty('last')) {
-                var mark = new L.Marker(latLng, {
-                    icon: icon
-                });
-                var name = feature.properties.Individ_ID;
+         };
+    //---------------Set Pop Up---------------------//
+    function popupInfo (mark, feature) {
+        var name = feature.properties.Individ_ID;
                 var age = feature.properties.Age;
                 var born = feature.properties.Calf;
                 var Survive = feature.properties.CalfNow;
@@ -187,6 +305,16 @@ function addGeoJSONLayer(map, attributes) {
                         this.closePopup();
                     }
                 });
+    };
+    
+    var linelayer = new L.GeoJSON.AJAX(linedata, 
+        { style: styleLine,
+        pointToLayer: function (feature, latLng) {
+            if (feature.properties.hasOwnProperty('last')) {
+                var mark = new L.Marker(latLng, {
+                    icon: icon
+                });
+                popupInfo (mark, feature)
                 return mark;
             }
         },                            
@@ -218,72 +346,13 @@ function addGeoJSONLayer(map, attributes) {
                 /*console.log(myData);*/
 
                 var linelayer = L.geoJson(null, 
-                    { style: function(feature) {
-                    d = feature.properties.colorByAttr;
-                    var line = feature.properties.Individ_ID;
-
-                    /*console.log(line);*/
-                    if (line === 'A_32')
-                        return {color: '#696969',opacity:0.7};
-                    else if (line === 'A_35')
-                        return {color: '#556B2F',opacity:0.7};
-                    else if (line === 'A_51')
-                        return {color: '#B8860B',opacity:0.7};
-                    else if (line === 'A_59')
-                        return {color: '#006400',opacity:0.7};
-                    else if (line === 'A_61')
-                        return {color: '#00008B',opacity:0.7};
-                    else if (line === 'A_73')
-                        return {color: '#1E90FF',opacity:0.7};
-                    else if (line === 'A_82')
-                        return {color: '#483D8B',opacity:0.7};
-                    else if (line === 'A_86')
-                        return {color: '#FF1493',opacity:0.7};
-                    else if (line === 'A_89')
-                        return {color: '#8B4513',opacity:0.7};
-                    else if (line === 'A_96')
-                        return {color: '#4B0082',opacity:0.7};
-                    else if (line === 'A_97')
-                        return {color: '#8A2BE2',opacity:0.7};
-                    else if (line === 'A_100')
-                        return {color: '#8B0000',opacity:0.7};
-                    else if (line === 'A_103')
-                        return {color: '#008B8B',opacity:0.7};
-                    else return {color: '#5F9EA0',opacity:0.7}
-                 },
+                    { style: styleLine,
                     pointToLayer: function (feature, latLng) {
                         if (feature.properties.hasOwnProperty('last')) {
                             var mark = new L.Marker(latLng, {
                                 icon: icon
                             });
-                            var name = feature.properties.Individ_ID;
-                            var age = feature.properties.Age;
-                            var born = feature.properties.Calf;
-                            var Survive = feature.properties.CalfNow;
-
-                            var popupContent = "<p><b>Moose:</b> " + name + "</p>"
-
-                                if (age == 0){
-                                    popupContent += "<p><b>Age:</b> " + "</b> Unknown</p>"+"<p><b>Sex:</b> Female ";; 
-                                }
-                                else if (age >= 0){
-                                    popupContent += "<p><b>Age:</b> " + age + "</p>"+"<p><b>Sex:</b> Female ";
-                                }
-
-                            var popupContent2 = popupContent +=
-                                "<p><b>#Calves Born:</b> " + born + "</p>"
-                                + "<p><b>#Calves Survive:</b> " + Survive + "</p>"
-
-                            mark.bindPopup(popupContent2);
-                            
-                            mark.on({
-                                mouseover: function(){
-                                    this.openPopup();
-                                },
-                                mouseout: function(){
-                                    this.closePopup();
-                                }
-                            });
+                            popupInfo (mark, feature)
                             return mark;
                         }
                     },
