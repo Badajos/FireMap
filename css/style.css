@@ -1,0 +1,122 @@
+/* colors
+#e6e7d5 Eggshell
+#c9cba3 dark vanilla
+#ffe1a8 Navajo White
+#e26d5c Terra Cotta
+#723d46 Roast Coffee
+#472d30 Old Burgundy
+*/
+
+/* Global styles
+------------------------------------*/
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;    
+}
+
+a {
+    color: #ed6a5a;
+}
+a:hover {
+    text-decoration: none;
+}
+
+h1 {
+  font-size: 40px;
+  font-weight: 600;
+  padding-top: 5px;
+  margin-bottom: 5px;
+  color: #e26d5c;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.head-p {
+    padding-bottom: 5px;
+    margin-bottom: 0px;
+    margin-top: 3px;
+}
+
+.wrapper{
+    max-width: 100%;
+    margin: 0px auto; 
+}
+
+/* Map
+------------------------------------*/
+.panel {
+    width: 20%;
+    height: 500px;
+    border-right: 5px solid #c9cba3;
+    border-top: 5px solid #c9cba3;
+    border-bottom: 5px solid #c9cba3;
+    background-color: #e6e7d5;
+    text-indent: 10px;
+    float: right;
+}
+
+#map {
+    width: 80%;
+    height: 500px;
+    display: inline-block;
+    border:5px solid #c9cba3;
+    margin: 0px auto;
+    padding: 10px auto;
+    float: left;  
+}
+
+/* Header & Footer
+------------------------------------*/
+header, #map-title {
+  background: #472d30;
+  color: #a5a786; 
+  text-align: center;
+}
+
+/* Header*/
+header h2 {
+    color: #e26d5c;
+    margin-top: 0;
+    margin-bottom: 5px;
+    padding-bottom: 10px;
+    font-size: 30px;
+    font-weight: 600;
+    font-family: 'Open Sans', sans-serif;
+    clear: both;
+}
+
+/*Footer*/
+footer {
+    text-align: center;
+    background: #472d30;
+    color: #a5a786; 
+    padding-top: 2px;
+    padding-bottom: 5px;
+    /*margin-top: 0px;
+    margin-bottom: 0px;*/
+    clear:both
+}
+
+.citation {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#creditText a {
+    padding-left: 5px;
+    display: inline-block;
+}
+
+/* Popup
+------------------------------------*/
+.leaflet-popup-content p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding 5px;
+}
