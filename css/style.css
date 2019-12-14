@@ -128,10 +128,6 @@ footer {
     padding 5px;
 }
 
-.leaflet-control-layers-toggle:after{ 
-    content:"your text"; 
-    color:#000 ;
-}
 .leaflet-control-layers-toggle{ 
     width:auto;
     background-position:3px 50% ;
