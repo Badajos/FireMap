@@ -1,6 +1,7 @@
 /* colors
 #e6e7d5 Eggshell
 #c9cba3 dark vanilla
+#a5a786
 #ffe1a8 Navajo White
 #e26d5c Terra Cotta
 #723d46 Roast Coffee
@@ -34,13 +35,19 @@ h1 {
   padding-top: 5px;
   margin-bottom: 5px;
   color: #e26d5c;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Bitter', serif;
 }
 
-.head-p {
-    padding-bottom: 5px;
+.head-p2{
+    color:#c9cba3;
+    margin-top: 15px;
     margin-bottom: 0px;
-    margin-top: 3px;
+    padding-bottom: 20px;
+    
+}
+.head-p {
+    padding-bottom: 0px;
+    margin: 0px;
 }
 
 .wrapper{
@@ -87,7 +94,7 @@ header h2 {
     padding-bottom: 10px;
     font-size: 30px;
     font-weight: 600;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Bitter', serif;
     clear: both;
 }
 
@@ -132,5 +139,29 @@ footer {
     padding-left:36px;
     text-decoration:none;
     line-height:36px;
+}
 
+/* Legend
+------------------------------------*/
+.info {
+padding: 6px 8px;
+font: 14px/16px 'Open Sans', sans-serif;
+background: white;
+background: rgba(255,255,255,0.8);
+box-shadow: 0 0 15px rgba(0,0,0,0.2);
+border-radius: 5px;
+}
+
+.legend {
+background-color: “black”;
+line-height: 25px;
+color: #555;
+width: auto;
+}
+.legend i {
+width: 18px;
+height: 18px;
+float: left;
+margin-right: 8px;
+opacity: 0.7;
 }

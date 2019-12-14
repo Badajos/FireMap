@@ -6,7 +6,7 @@ function createMap(){
         fullscreenControl: true,
         timeDimension: true,
         timeDimensionOptions: {
-            timeInterval: "2019-06-01/2019-09-16",//start&stop for slider
+            /*timeInterval: "2019-06-01/2019-09-16",*///start&stop for slider
             period: "P1D",//time for slider to move forward
         },
         timeDimensionControl: true,//puts slider on map
@@ -20,6 +20,7 @@ function createMap(){
             loopButton:    true, 
             playerOptions: {
                 transitionTime: 100, //speed of animation
+                loop: false,
                 startOver:true,
             },   
         }, 
@@ -92,7 +93,7 @@ function createMap(){
                     }
          }
     });
-    var hr_A73 = L.geoJson.ajax("data/poly_GPS_A_73.geojson", {
+    var hr_A73 = L.geoJson.ajax("data/poly_VHF_A_73.geojson", {
         style: function(feature){
             d = feature.properties.colorByAttr;
             return {color: '#1E90FF',  
@@ -196,6 +197,36 @@ function getFire(map,data){
         duration:"PT23H",  //needs to be at 23 hours to show individ polygons      
     });
     fireLayer.addTo(map);
+    
+    //----------create the legend----------
+    function getColor(d) {
+        return d > 5000000 ? '#7a0177' :
+            '#FF4500'
+    }
+            
+    console.log(fireLayer);
+    var legend = L.control({position: 'bottomright'});
+    
+    legend.onAdd = function (map) {
+    var acres = 0;
+    var div = L.DomUtil.create('div', 'info legend');
+    labels = [],
+    categories = ['Swan Lake Fire'];
+    
+    for (var i = 0; i < categories.length; i++) {
+
+            div.innerHTML += 
+            labels.push(
+                '<i class="circle" style="background:' + getColor(categories[i])+"; opacity: 0.5; stroke: #FF4500" + '"></i> ' +
+            (categories[i] ? categories[i] : '+'));
+        }
+        console.log(labels)
+        div.innerHTML = labels.join('<br>');
+    return div;
+    };
+    legend.addTo(map);
+
+    /*updateLegend(map, attributes[0]);*/ 
 };
 
 //----------Import GeoJSON data; call functions-------//
@@ -378,7 +409,8 @@ function addGeoJSONLayer(map, attributes) {
             });
     };
 };
-   
+
+
 //------------global variables------------------------//
 
 var polydata = "data/SwanLakeEachDay.geojson"
