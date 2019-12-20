@@ -26,7 +26,9 @@ function createMap(){
         }, 
         center: [60.67, -150.57],
     });
-
+    
+    //------------add base maps-------------------------//
+    
     //Varibles for attribution box on the map.
     var mbAttr = '<a href="http://openstreetmap.org">OpenStreetMap</a> |' +' <a href="http://mapbox.com">Mapbox</a>'; 
 
@@ -40,7 +42,7 @@ function createMap(){
 
     //For Custom basemaps - Replace your username and StyleID
     var customBasemap = new L.tileLayer(mbStyleUrl, {id: 'badajos/ck0ohmxns078c1cmjd7r0as5l', token: apitoken,  attribution: mbAttr}).addTo(map);
-
+    
     var baseMaps = {
         "Grayscale": customBasemap,
         "Open Street Map": osm
@@ -93,7 +95,7 @@ function createMap(){
                     }
          }
     });
-    var hr_A73 = L.geoJson.ajax("data/poly_VHF_A_73.geojson", {
+    var hr_A73 = L.geoJson.ajax("data/poly_GPS_A_73.geojson", {
         style: function(feature){
             d = feature.properties.colorByAttr;
             return {color: '#1E90FF',  
@@ -149,7 +151,7 @@ function createMap(){
                     }
          }
     });
-    var hr_A103 = L.geoJson.ajax("data/poly_VHF_A_103.geojson", {
+    var hr_A103 = L.geoJson.ajax("data/poly_GPS_A_103.geojson", {
         style: function(feature){
             d = feature.properties.colorByAttr;
             return {color: '#008B8B',  
@@ -204,7 +206,7 @@ function getFire(map,data){
             '#FF4500'
     }
             
-    console.log(fireLayer);
+    /*console.log(fireLayer);*/
     var legend = L.control({position: 'bottomright'});
     
     legend.onAdd = function (map) {
@@ -220,7 +222,7 @@ function getFire(map,data){
                 '<i class="circle" style="background:' + getColor(categories[i])+"; opacity: 0.5; stroke: #FF4500" + '"></i> ' +
             (categories[i] ? categories[i] : '+'));
         }
-        console.log(labels)
+        /*console.log(labels)*/
         div.innerHTML = labels.join('<br>');
     return div;
     };
@@ -367,7 +369,7 @@ function addGeoJSONLayer(map, attributes) {
         /*console.log(attributes)*/
             $("#FilterGroup").change(function() {
              var choice = $("input[name=filter]:checked").val()
-                console.log(choice)
+                /*console.log(choice)*/
                 if (choice === "All") {
                     addGeoJSONLayer(map, attributes) 
                 }
@@ -410,9 +412,7 @@ function addGeoJSONLayer(map, attributes) {
     };
 };
 
-
 //------------global variables------------------------//
-
 var polydata = "data/SwanLakeEachDay.geojson"
 var linedata = "data/mooseline.geojson"
  
