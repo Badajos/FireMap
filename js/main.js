@@ -49,7 +49,6 @@ function createMap(){
         
     var baseMaps = {
         "Open Street Map": osm,
-        /*"ESRI Satellite": Esri_WorldImagery,*/
         "Grayscale": customBasemap,
     };
 
