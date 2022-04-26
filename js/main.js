@@ -1,6 +1,5 @@
 //------------Create the map--------------------------//
 function createMap(){
-    
     var map = L.map('map', {
         zoom: 9,
         fullscreenControl: true,
@@ -32,7 +31,7 @@ function createMap(){
     //Varibles for attribution box on the map.
     var mbAttr = '<a href="http://openstreetmap.org">OpenStreetMap</a> |' +' <a href="http://mapbox.com">Mapbox</a>'; 
 
-    var osm = new L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution: mbAttr});
+    var osm = new L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution: mbAttr}).addTo(map);
 
     //Variable for storing your Mapbox API Token
     var apitoken = 'pk.eyJ1IjoiYmFkYWpvcyIsImEiOiJjamQyNW5pcmsybjNrMnhvMXQxb2hlNHI3In0.6_NSwAZooCl3XoCmbAUoeA' //Enter your API Token - go to 'https://www.mapbox.com/install/' to yours */
@@ -41,11 +40,17 @@ function createMap(){
     var mbStyleUrl = 'https://api.mapbox.com/styles/v1/{id}/tiles/256/{z}/{x}/{y}?access_token={token}';
 
     //For Custom basemaps - Replace your username and StyleID
-    var customBasemap = new L.tileLayer(mbStyleUrl, {id: 'badajos/ck0ohmxns078c1cmjd7r0as5l', token: apitoken,  attribution: mbAttr}).addTo(map);
+    var customBasemap = new L.tileLayer(mbStyleUrl, {id: 'badajos/ck0ohmxns078c1cmjd7r0as5l', token: apitoken,  attribution: mbAttr});
     
+    /*var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, ' +
+        'AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+    });*/
+        
     var baseMaps = {
+        "Open Street Map": osm,
+        /*"ESRI Satellite": Esri_WorldImagery,*/
         "Grayscale": customBasemap,
-        "Open Street Map": osm
     };
 
     //------------add mini map plugin------------------//
@@ -58,7 +63,7 @@ function createMap(){
     var hr_A32 = L.geoJson.ajax("data/poly_GPS_A_32.geojson", {
         style: function(feature){
             d = feature.properties.colorByAttr;
-            return {color: '#696969',  
+            return {color: '#708691',  
                     opacity:0.5
                     }
          }
@@ -66,7 +71,7 @@ function createMap(){
     var hr_A35 = L.geoJson.ajax("data/poly_GPS_A_35.geojson", {
         style: function(feature){
             d = feature.properties.colorByAttr;
-            return {color: '#556B2F',  
+            return {color: '#598296',  
                     opacity:0.5
                     }
          }
@@ -74,7 +79,7 @@ function createMap(){
     var hr_A51 = L.geoJson.ajax("data/poly_GPS_A_51.geojson", {
         style: function(feature){
             d = feature.properties.colorByAttr;
-            return {color: '#B8860B',  
+            return {color: '#579c7a',  
                     opacity:0.5
                     }
          }
@@ -82,7 +87,7 @@ function createMap(){
     var hr_A59 = L.geoJson.ajax("data/poly_GPS_A_59.geojson", {
         style: function(feature){
             d = feature.properties.colorByAttr;
-            return {color: '#006400',  
+            return {color: '#a67275',  
                     opacity:0.5
                     }
          }
@@ -90,7 +95,7 @@ function createMap(){
     var hr_A61 = L.geoJson.ajax("data/poly_GPS_A_61.geojson", {
         style: function(feature){
             d = feature.properties.colorByAttr;
-            return {color: '#00008B',  
+            return {color: '#a64b50',  
                     opacity:0.5
                     }
          }
@@ -98,7 +103,7 @@ function createMap(){
     var hr_A73 = L.geoJson.ajax("data/poly_GPS_A_73.geojson", {
         style: function(feature){
             d = feature.properties.colorByAttr;
-            return {color: '#1E90FF',  
+            return {color: '#3d7b99',  
                     opacity:0.5
                     }
          }
@@ -106,7 +111,7 @@ function createMap(){
     var hr_A82 = L.geoJson.ajax("data/poly_GPS_A_82.geojson", {
         style: function(feature){
             d = feature.properties.colorByAttr;
-            return {color: '#483D8B',  
+            return {color: '#73569c',  
                     opacity:0.5
                     }
          }
@@ -114,7 +119,7 @@ function createMap(){
     var hr_A86 = L.geoJson.ajax("data/poly_GPS_A_86.geojson", {
         style: function(feature){
             d = feature.properties.colorByAttr;
-            return {color: '#FF1493',  
+            return {color: '#787bad',  
                     opacity:0.5
                     }
          }
@@ -122,7 +127,7 @@ function createMap(){
     var hr_A89 = L.geoJson.ajax("data/poly_GPS_A_89.geojson", {
         style: function(feature){
             d = feature.properties.colorByAttr;
-            return {color: '#8B4513',  
+            return {color: '#4b50ad',  
                     opacity:0.5
                     }
          }
@@ -130,7 +135,7 @@ function createMap(){
     var hr_A96 = L.geoJson.ajax("data/poly_GPS_A_96.geojson", {
         style: function(feature){
             d = feature.properties.colorByAttr;
-            return {color: '#4B0082',  
+            return {color: '#515157',  
                     opacity:0.5
                     }
          }
@@ -138,7 +143,7 @@ function createMap(){
     var hr_A97 = L.geoJson.ajax("data/poly_GPS_A_97.geojson", {
         style: function(feature){
             d = feature.properties.colorByAttr;
-            return {color: '#8A2BE2',  
+            return {color: '#787887',  
                     opacity:0.5
                     }
          }
@@ -146,7 +151,7 @@ function createMap(){
     var hr_A100 = L.geoJson.ajax("data/poly_GPS_A_100.geojson", {
         style: function(feature){
             d = feature.properties.colorByAttr;
-            return {color: '#8B0000',  
+            return {color: '#7f7094',  
                     opacity:0.5
                     }
          }
@@ -154,7 +159,7 @@ function createMap(){
     var hr_A103 = L.geoJson.ajax("data/poly_GPS_A_103.geojson", {
         style: function(feature){
             d = feature.properties.colorByAttr;
-            return {color: '#008B8B',  
+            return {color: '#739c88',  
                     opacity:0.5
                     }
          }
@@ -281,32 +286,32 @@ function addGeoJSONLayer(map, attributes) {
             
             /*console.log(line);*/
             if (line === 'A_32')
-                return {color: '#696969',opacity:0.7};
+                return {color: '#708691', fillOpacity:0.7};
             else if (line === 'A_35')
-                return {color: '#556B2F',opacity:0.7};
+                return {color: '#598296', opacity:0.7};
             else if (line === 'A_51')
-                return {color: '#B8860B',opacity:0.7};
+                return {color: '#579c7a',opacity:0.7};
             else if (line === 'A_59')
-                return {color: '#006400',opacity:0.7};
+                return {color: '#a67275',opacity:0.7};
             else if (line === 'A_61')
-                return {color: '#00008B',opacity:0.7};
+                return {color: '#a64b50',opacity:0.7};
             else if (line === 'A_73')
-                return {color: '#1E90FF',opacity:0.7};
+                return {color: '#3d7b99',opacity:0.7};
             else if (line === 'A_82')
-                return {color: '#483D8B',opacity:0.7};
+                return {color: '#73569c',opacity:0.7};
             else if (line === 'A_86')
-                return {color: '#FF1493',opacity:0.7};
+                return {color: '#787bad',opacity:0.7};
             else if (line === 'A_89')
-                return {color: '#8B4513',opacity:0.7};
+                return {color: '#4b50ad',opacity:0.9};
             else if (line === 'A_96')
-                return {color: '#4B0082',opacity:0.7};
+                return {color: '#515157',opacity:0.7};
             else if (line === 'A_97')
-                return {color: '#8A2BE2',opacity:0.7};
+                return {color: '#787887',opacity:0.7};
             else if (line === 'A_100')
-                return {color: '#8B0000',opacity:0.7};
+                return {color: '#7f7094',opacity:0.7};
             else if (line === 'A_103')
-                return {color: '#008B8B',opacity:0.7};
-            else return {color: '#5F9EA0',opacity:0.7}
+                return {color: '#739c88',opacity:0.7};
+            else return {color: '#598296',opacity:0.7}
          };
     //---------------Set Pop Up---------------------//
     function popupInfo (mark, feature) {
@@ -355,7 +360,8 @@ function addGeoJSONLayer(map, attributes) {
      
     var linelayerTD = L.timeDimension.layer.geoJson(linelayer, {
         updateTimeDimension: true,
-        addlastPoint: true
+        addlastPoint: true,
+        duration:"P7D",//this cuts off the line to show the last 7 days
     });
         
     var myData =  L.layerGroup([]);//empty layer group
