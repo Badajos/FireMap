@@ -361,7 +361,11 @@ function addGeoJSONLayer(map, attributes) {
     var linelayerTD = L.timeDimension.layer.geoJson(linelayer, {
         updateTimeDimension: true,
         addlastPoint: true,
+<<<<<<< HEAD
         duration:"P7D",//this cuts off the line to show the last 7 days
+=======
+		duration:"P7D",//this cuts off the line to show the last 7 days
+>>>>>>> 2b0c20e1b5a9d5cc06c697c56e2441032312d9ac
     });
         
     var myData =  L.layerGroup([]);//empty layer group
