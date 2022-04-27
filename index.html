@@ -3,7 +3,8 @@
 
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta name="author" content="Ori Badajos">
         <meta name="description" content="How moose respond to fire">
         
@@ -16,13 +17,15 @@
         <link rel="stylesheet"href= "css/style.css">
         
         <!--leaflet-->
-        <script src ="lib/leaflet-src.js"> </script>
-        <link rel="stylesheet"href= "lib/leaflet.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="" />
+        <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
         
         <!-- Timedimension Plugin -->
-        <link rel="stylesheet" href="lib/leaflet.timedimension.control.min.css" />
-        <script type="text/javascript" src="lib/iso8601.min.js"></script>
-        <script type="text/javascript" src="lib/leaflet.timedimension.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.5.1/dist/leaflet.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-timedimension@1.1.1/dist/leaflet.timedimension.control.min.css" />
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/leaflet@1.5.1/dist/leaflet.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/iso8601-js-period@0.2.1/iso8601.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/leaflet-timedimension@1.1.1/dist/leaflet.timedimension.min.js"></script>
         
         <!-- AJAX Plugin -->
         <script src="lib/leaflet.ajax.js"></script>
@@ -35,103 +38,45 @@
         <link rel="stylesheet" href="lib/leaflet.groupedlayercontrol.css" />
         <script type="text/javascript" src="lib/leaflet.groupedlayercontrol.js"></script>
         
+        <!-- full screen Plugin -->
+        <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+        <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+        
+        <!-- Leaflet.panel layer Plugin -->
+        <link rel="stylesheet" href="lib/leaflet-panel-layers.min.css" />
+        <script src="lib/leaflet-panel-layers.min.js"></script>
+        <link rel="stylesheet" href="lib/leaflet-panel-layers.src.css" />
+        <script src="lib/leaflet-panel-layers.src.js"></script>
+        
+        
     </head>
     
     <body>
-        <header>
-                <h1 class = "head-title">What happens to moose during a wildfire?</h1>
-                <h2 class = "sub-title">Swan Lake Fire, Alaska</h2>
-                <p class ="head-p">On June 5th, 2019, the Swan Lake fire started in a remote region of the Kenai Peninsula, Alaska.</p> 
-                <p class ="head-p">By late September, the fire had burned over 160,000 acres. </p>
-                <p class ="head-p">The Alaska Department of Fish and Game had thirteen moose tagged with GPS collars in the vicinity of the fire.</p> 
-                <p class ="head-p2">Use the time slider to watch the fire grow over time and see how moose react to the the fire.</p>
-        </header>
-        <main>   
-        <div id="map"></div>
-        <div class="panel">
-                    <form>
-                    <h2>Select a moose:</h2>
-                    <div id="FilterGroup">
-                        <div class="col-xs-4">
-                        <input type= "radio" name="filter" value="All" checked> 
-                        <label for="All">All</label>   
-                        </div>
-
-                        <div class="col-xs-4">
-                        <input type= "radio" id="r1" name="filter" value="A_32"> 
-                        <label for="A_32">A_32</label>
-                        </div>
-
-                        <div class="col-xs-4">
-                        <input type= "radio" id="r2" name="filter" value="A_35">
-                        <label for="A_35">A_35</label>
-                        </div>
-
-                        <div class="col-xs-4">
-                        <input type= "radio" id="r3" name="filter" value="A_51">
-                        <label for="A_51">A_51</label>
-                        </div>
-
-                        <div class="col-xs-4">
-                        <input type= "radio" id="r4" name="filter" value="A_59">
-                        <label for="A_59">A_59</label>
-                        </div> 
-                        
-                        <div class="col-xs-4">
-                        <input type= "radio" id="r5" name="filter" value="A_61">
-                        <label for="A_61">A_61</label>
-                        </div>                 
-                        
-                        <div class="col-xs-4">
-                        <input type= "radio" id="r6" name="filter" value="A_73">
-                        <label for="A_73">A_73</label>
-                        </div>                 
-                        
-                        <div class="col-xs-4">
-                        <input type= "radio" id="r7" name="filter" value="A_82">
-                        <label for="A_82">A_82</label>
-                        </div>                 
-                        
-                        <div class="col-xs-4">
-                        <input type= "radio" id="r8" name="filter" value="A_86">
-                        <label for="A_86">A_86</label>
-                        </div>
-                        
-                        <div class="col-xs-4">
-                        <input type= "radio" id="r9" name="filter" value="A_89">
-                        <label for="A_89">A_89</label>
-                        </div>
-                        
-                        <div class="col-xs-4">
-                        <input type= "radio" id="r10" name="filter" value="A_96">
-                        <label for="A_96">A_96</label>
-                        </div>
-                        
-                        <div class="col-xs-4">
-                        <input type= "radio" id="r11" name="filter" value="A_97">
-                        <label for="A_97">A_97</label>
-                        </div>
-                        
-                        <div class="col-xs-4">
-                        <input type= "radio" id="r12" name="filter" value="A_100">
-                        <label for="A_100">A_100 (Offspring of A_82)</label>
-                        </div>
-                        
-                        <div class="col-xs-4">
-                        <input type= "radio" id="r13" name="filter" value="A_103">
-                        <label for="A_103">A_103 (Offspring of A_51)</label>
-                        </div> 
+        <div class="flexbox-container">
+            <div class="flexbox-item flexbox-item-header">
+                <header>
+                        <h1 class = "head-title">What happens to moose during a wildfire?</h1>
+                        <h2 class = "sub-title">Swan Lake Fire, Alaska</h2>
+                        <p class ="head-p">On June 5th, 2019, the Swan Lake fire started in a remote region of the Kenai Peninsula, Alaska.</p> 
+                        <p class ="head-p">By late September, the fire had burned over 160,000 acres. </p>
+                        <p class ="head-p">The Alaska Department of Fish and Game had thirteen moose tagged with GPS collars in the vicinity of the fire.</p> 
+                        <p class ="head-p2">Use the time slider to watch the fire grow over time and see how moose react to the the fire.</p>
+                </header>
+            </div>    
+            <div class="flexbox-item flexbox-item-map"> 
+                <div id="content">
+                    <div id="map"></div>
+                </div>    
+            </div>     
+            <div class="flexbox-item flexbox-item-footer">
+                <footer>
+                    <div id="creditText">
+                        <p class ="citation">Alaska Wildland Fire Information<a target="_blank" href= "https://www.fireweatheravalanche.org/wildfire/incident/79670/alaska/swan-lake-fire">Swan Lake fire</a>
+                    
                     </div>
-                    </form>    
-                </div> 
-            </main>
-        <footer>
-            <div class = "wrapper">
-                <div id="creditText">
-                    <p class ="citation">Alaska Wildland Fire Information<a target="_blank" href= "https://www.fireweatheravalanche.org/wildfire/incident/79670/alaska/swan-lake-fire">Swan Lake fire</a>
-                </div>
-            </div>
-        </footer>     
+                </footer> 
+            </div>    
+        </div>    
        
         <!--libraries-->
         <script src ="lib/jquery-3.4.1.js"> </script>
