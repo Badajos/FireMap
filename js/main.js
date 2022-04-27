@@ -55,15 +55,8 @@ function createMap(){
      //------------add panel layers-------------------------//
     
     //------------new-------------------------//
-var conf = {
-    base: {
-        title: 'Others Layers',
-        layers: [
-            {
-                group: "Base Maps",
-                collapsed: true,
-                layers: [
-                	{
+var baseLayers = [
+                    {
                 		name: "Open Street Map",
                 		active: true,
                 		layer: osm
@@ -72,10 +65,12 @@ var conf = {
                         name: "Grayscale",
                         layer: customBasemap
                     }
-                ]
-            },
-            {  
+                ];
+            
+var overLayers = [    
+        {  
 		group: "Pre-fire Home Ranges",
+        collapsed: true,
 		layers: [      
         {
                         
@@ -248,13 +243,11 @@ var conf = {
             })
         },  
 		]
-        },
-        ]
-    },
-}
+        }];
+
     
-    var base1 = L.control.panelLayers(conf.base.layers, null,  {
-        title: conf.base.title,
+    var panelLayers = new L.control.panelLayers(baseLayers, overLayers,  {
+        /*title: conf.base.title,*/
         position: 'topright',
         compact: true,
         collapsibleGroups: true,
@@ -770,6 +763,7 @@ function addGeoJSONLayer(map, attributes) {
 var conf = {
     tree: {
         title: "Filter by animal",
+        collapsed: true,
         layers: [
             {
                 active: true,
@@ -838,7 +832,183 @@ var conf = {
             },
             
 ]}}
-       
+var conf2 = {
+    tree: {
+        title: "Filter by animal",
+        collapsed: true,
+        layers: [
+                    {
+                        
+            active: false,
+            name: "A_32",
+            //icon: '<i class="icon icon-drinking_water"></i>',
+            layer: L.geoJson.ajax("data/poly_GPS_A_32.geojson", {
+                style: function(feature){
+                    d = feature.properties.colorByAttr;
+                    return {color: '#708691',  
+                            opacity:0.5
+                            }
+                }
+            })   
+        },
+        {
+            active: false,
+            name: "A_35",
+            //icon: '<i class="icon icon-drinking_water"></i>',
+            layer: L.geoJson.ajax("data/poly_GPS_A_35.geojson", {
+                style: function(feature){
+                d = feature.properties.colorByAttr;
+                return {color: '#598296',  
+                    opacity:0.7
+                }
+            }
+            }) 
+        },  
+        {
+            active: false,
+            name: "A_51",
+            //icon: '<i class="icon icon-drinking_water"></i>',
+            layer: L.geoJson.ajax("data/poly_GPS_A_51.geojson", {
+                style: function(feature){
+                d = feature.properties.colorByAttr;
+                    return {color: '#579c7a',  
+                        //opacity:0.5
+                    }
+                }
+            })
+        },
+        {
+            active: false,
+            name: "A_59",
+            //icon: '<i class="icon icon-drinking_water"></i>',
+            layer: L.geoJson.ajax("data/poly_GPS_A_59.geojson", {
+                style: function(feature){
+                d = feature.properties.colorByAttr;
+                    return {color: '#a67275',  
+                        //opacity:0.5
+                    }
+                }
+            })
+        },  
+        {
+            active: false,
+            name: "A_61",
+            //icon: '<i class="icon icon-drinking_water"></i>',
+            layer: L.geoJson.ajax("data/poly_GPS_A_61.geojson", {
+                style: function(feature){
+                d = feature.properties.colorByAttr;
+                    return {color: '#a64b50',  
+                        //opacity:0.5
+                    }
+                }
+            })
+        },  
+        {
+            active: false,
+            name: "A_73",
+            //icon: '<i class="icon icon-drinking_water"></i>',
+            layer: L.geoJson.ajax("data/poly_GPS_A_73.geojson", {
+                style: function(feature){
+                d = feature.properties.colorByAttr;
+                    return {color: '#3d7b99',  
+                        //opacity:0.5
+                    }
+                }
+            })
+        },  
+        {
+            active: false,
+            name: "A_82",
+            //icon: '<i class="icon icon-drinking_water"></i>',
+            layer: L.geoJson.ajax("data/poly_GPS_A_82.geojson", {
+                style: function(feature){
+                d = feature.properties.colorByAttr;
+                    return {color: '#73569c',  
+                        //opacity:0.5
+                    }
+                }
+            })
+        },
+        {
+            active: false,
+            name: "A_86",
+            //icon: '<i class="icon icon-drinking_water"></i>',
+            layer: L.geoJson.ajax("data/poly_GPS_A_86.geojson", {
+                style: function(feature){
+                d = feature.properties.colorByAttr;
+                    return {color: '#787bad',  
+                        //opacity:0.5
+                    }
+                }
+            })
+        },   
+        {
+            active: false,
+            name: "A_89",
+            //icon: '<i class="icon icon-drinking_water"></i>',
+            layer: L.geoJson.ajax("data/poly_GPS_A_89.geojson", {
+                style: function(feature){
+                d = feature.properties.colorByAttr;
+                    return {color: '#4b50ad',  
+                        //opacity:0.5
+                    }
+                }
+            })
+        },   
+        {
+            active: false,
+            name: "A_96",
+            //icon: '<i class="icon icon-drinking_water"></i>',
+            layer: L.geoJson.ajax("data/poly_GPS_A_96.geojson", {
+                style: function(feature){
+                d = feature.properties.colorByAttr;
+                    return {color: '#515157',  
+                        //opacity:0.5
+                    }
+                }
+            })
+        },  
+        {
+            active: false,
+            name: "A_97",
+            //icon: '<i class="icon icon-drinking_water"></i>',
+            layer: L.geoJson.ajax("data/poly_GPS_A_97.geojson", {
+                style: function(feature){
+                d = feature.properties.colorByAttr;
+                    return {color: '#787887',  
+                        //opacity:0.5
+                    }
+                }
+            })
+        },  
+        {
+            active: false,
+            name: "A_100 (offspring of A_82)",
+            //icon: '<i class="icon icon-drinking_water"></i>',
+            layer: L.geoJson.ajax("data/poly_GPS_A_100.geojson", {
+                style: function(feature){
+                d = feature.properties.colorByAttr;
+                    return {color: '#7f7094',  
+                        //opacity:0.5
+                    }
+                }
+            })
+        }, 
+        {
+            active: false,
+            name: "A_103 (offspring of A_51)",
+            //icon: '<i class="icon icon-drinking_water"></i>',
+            layer: L.geoJson.ajax("data/poly_GPS_A_103.geojson", {
+                style: function(feature){
+                d = feature.properties.colorByAttr;
+                    return {color: '#739c88',  
+                        //opacity:0.5
+                    }
+                }
+            })
+        },       
+]}};
+              
 var over1 = L.control.panelLayers(null, conf.tree.layers, {
     title: conf.tree.title,
     position: 'topright',
