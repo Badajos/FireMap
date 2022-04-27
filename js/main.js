@@ -403,18 +403,18 @@ function addGeoJSONLayer(map, attributes) {
                 var born = feature.properties.Calf;
                 var Survive = feature.properties.CalfNow;
                 
-                var popupContent = "<p><b>Moose:</b> " + name + "</p>"
+                var popupContent = "<b>Moose:</b> " + name + "<br>"
                                  
                     if (age == 0){
-                        popupContent += "<p><b>Age:</b> " + "</b> Unknown</p>"+"<p><b>Sex:</b> Female ";; 
+                        popupContent += "<b>Age:</b> " + "</b> Unknown <br>"+"<b>Sex:</b> Female "; 
                     }
                     else if (age >= 0){
-                        popupContent += "<p><b>Age:</b> " + age + "</p>"+"<p><b>Sex:</b> Female ";;
+                        popupContent += "<b>Age:</b> " + age + "<br>"+"<b>Sex:</b> Female ";
                     }
                 
-                var popupContent2 = popupContent +=
-                    "<p><b>#Calves Born:</b> " + born + "</p>"
-                    + "<p><b>#Calves Survive:</b> " + Survive + "</p>"
+                var popupContent2 = popupContent += 
+                    "<br><b>#Calves Born:</b> " + born + "<br>"
+                    + "<b>#Calves Survive:</b> " + Survive + "<br>"
                 
                 mark.bindPopup(popupContent2);
                 
